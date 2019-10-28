@@ -1,1 +1,25 @@
+== Getting Started with Spring Cloud Task
+This guide walks you through an overview of Spring Cloud Task and the process of creating and launching short-lived
+batch application.
 
+=== What is Spring Cloud Task?
+A framework for building short-lived Spring Boot microservices, such as batch data processing jobs. You can learn more about
+the framework from the link:https://spring.io/projects/spring-cloud-task[project-site],
+link:https://spring.io/projects/spring-cloud-task#learn[documentation],
+and link:https://github.com/spring-cloud/spring-cloud-task/tree/master/spring-cloud-task-samples[samples].
+
+=== Simple Task Application
+In the following guide, we develop a Spring Boot application that uses Spring Cloud Task and deploy it to Cloud Foundry,
+Kubernetes, and your local machine.
+
+link:https://dataflow.spring.io/docs/batch-developer-guides/batch/spring-task/[Simple Task Application]
+
+=== Spring Batch Job as a Task
+In the following guide, we develop a Spring Batch application and deploy it to Cloud Foundry, Kubernetes, and your local
+machine.
+
+link:https://dataflow.spring.io/docs/batch-developer-guides/batch/spring-batch/[Spring Batch Job as a Task]
+
+== Summary
+Congratulations! You have completed Spring Cloud Task's high-level overview, and you were able to build, test and launch
+a simple task and as well a batch-job.
