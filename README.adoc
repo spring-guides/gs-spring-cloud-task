@@ -6,7 +6,7 @@ batch application.
 A framework for building short-lived Spring Boot microservices, such as batch data processing jobs. You can learn more about
 the framework from the link:https://spring.io/projects/spring-cloud-task[project-site],
 link:https://spring.io/projects/spring-cloud-task#learn[documentation],
-and link:https://github.com/spring-cloud/spring-cloud-task/tree/master/spring-cloud-task-samples[samples].
+and link:https://github.com/spring-cloud/spring-cloud-task/tree/main/spring-cloud-task-samples[samples].
 
 === Simple Task Application
 In the following guide, we develop a Spring Boot application that uses Spring Cloud Task and deploy it to Cloud Foundry,
