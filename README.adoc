@@ -28,14 +28,15 @@ and link:https://github.com/spring-cloud/spring-cloud-task/tree/main/spring-clou
 === Task Application Overview
 In the following guide, we develop a Spring Boot application that uses Spring Cloud Task and deploy it to your local machine.
 We will use an H2 database to initially demonstrate Spring Cloud Task functionality, but the value of Spring Cloud Task
-is in its ability to store the results of executed tasks in a persistent datastore.  For this example we will use MariaDB
+is in its ability to store the results of executed tasks in a persistent datastore.  For this example we will progress by using MariaDB
 as our persistent datastore.
 
 === Spring Cloud Task using In Memory H2
 For the first step, we will use Spring Cloud Task with an embedded H2 datastore.  If no `spring.datasource` properties are detected on project
-initialization, Spring Cloud Task will spin up a new H2 instance to store the executed task results.  This facilitates a
+initialization, Spring Cloud Task will spin up a new H2 instance to store the executed task results.  This happens without any extra configuration requried.
+This facilitates a
 quick way to get up and running, but the results of your executed task will be lost when the application completes and
-the H2 database shuts down.  For this guide, ensure that the `spring.datasource` properties in `application.properites` are commented out.
+the H2 database shuts down.  For this step in the guide, ensure that the `spring.datasource` properties in `application.properites` are commented out.
 
 === Spring Cloud Task using Persistent MariaDB
 
@@ -66,6 +67,8 @@ show tables; --show all tables that Spring Cloud Task created
 select * from task_execution;
 ```
 
+You should be able to see all program runs that you executed while the MariaDB instance is running.
+
 == Summary
 Congratulations! You have completed Spring Cloud Task's high-level overview, and you were able to build, test and launch
-a simple task and as well a batch-job.
+a simple Spring Cloud Task application.
