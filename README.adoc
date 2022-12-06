@@ -1,25 +1,76 @@
 == Getting Started with Spring Cloud Task
-This guide walks you through an overview of Spring Cloud Task and the process of creating and launching short-lived
-batch application.
+This guide walks you through an overview of Spring Cloud Task and the process of creating and launching a short-lived application.
+
+== Starting with Spring Initializr
+
+You can use this https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.0.0-RC2&packaging=jar&jvmVersion=17&groupId=com.example&artifactId=demo&name=demo&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.demo&dependencies=jdbc,cloud-task,mariadb,h2[pre-initialized project] and click *Generate* to download a ZIP file. This project is configured to fit the examples in this tutorial.
+
+To manually initialize the project:
+
+. Navigate to https://start.spring.io.
+This service pulls in all the dependencies you need for an application and does most of the setup for you.
+. Choose either Gradle or Maven and the language you want to use. This guide assumes that you chose Java.
+. Click *Dependencies* and select _Task_, _H2 Database_, _JDBC API_, and _MariaDB Driver_.
+. Click *Generate*.
+. Download the resulting ZIP file, which is an archive of a task application that is configured with your choices.
+
+NOTE: If your IDE has the Spring Initializr integration, you can complete this process from your IDE.
+
+NOTE: You can also fork the project from Github and open it in your IDE or other editor.
+
 
 === What is Spring Cloud Task?
-A framework for building short-lived Spring Boot microservices, such as batch data processing jobs. You can learn more about
+Spring Cloud Task is a framework for building short-lived Spring Boot microservices, such as batch data processing jobs. You can learn more about
 the framework from the link:https://spring.io/projects/spring-cloud-task[project-site],
 link:https://spring.io/projects/spring-cloud-task#learn[documentation],
 and link:https://github.com/spring-cloud/spring-cloud-task/tree/main/spring-cloud-task-samples[samples].
 
-=== Simple Task Application
-In the following guide, we develop a Spring Boot application that uses Spring Cloud Task and deploy it to Cloud Foundry,
-Kubernetes, and your local machine.
+=== Task Application Overview
+In this guide, we develop a Spring Boot application that uses Spring Cloud Task and deploy it to your local machine.
+We use an H2 database to initially demonstrate Spring Cloud Task functionality, but the value of Spring Cloud Task
+is in its ability to store the results of executed tasks in a persistent datastore.  For this example, we progress by using MariaDB
+as our persistent datastore.
 
-link:https://dataflow.spring.io/docs/batch-developer-guides/batch/spring-task/[Simple Task Application]
+=== Spring Cloud Task using In Memory H2
+For the first step, we use Spring Cloud Task with an embedded H2 datastore.  If no `spring.datasource` properties are detected on project
+initialization, Spring Cloud Task spins up a new H2 instance to store the executed task results.  This happens without any extra configuration.
+This facilitates a
+quick way to get up and running, but the results of your executed task are lost when the application completes and
+the H2 database shuts down.  For this step in the guide, ensure that the `spring.datasource` properties in `application.properites` are commented out.
 
-=== Spring Batch Job as a Task
-In the following guide, we develop a Spring Batch application and deploy it to Cloud Foundry, Kubernetes, and your local
-machine.
+=== Spring Cloud Task Using Persistent MariaDB
 
-link:https://dataflow.spring.io/docs/batch-developer-guides/batch/spring-batch/[Spring Batch Job as a Task]
+To persist data that lives longer than our short-lived task, we need an externally available datastore. In this guide, we use a MariaDB instance running in a Docker container.
+
+NOTE: To follow along with this guide, you need to run Docker locally.
+
+To run MariaDB locally, run the following command:
+```
+docker run -p 3306:3306 --name mariadb -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=task -d mariadb:latest
+```
+
+When the MariaDB instance is running, supply the configuration to your application through `application.properties`:
+
+```
+spring.datasource.url=jdbc:mariadb://localhost:3306/task
+spring.datasource.username=root
+spring.datasource.password=password
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+```
+
+Running the application again should now store the results of the Task execution inside of the MariaDB instance. You can verify this by getting a shell into the Docker container:
+```
+docker exec -it mariadb mariadb --user root -ppassword
+```
+And then running the commands
+```
+use task;
+show tables; --show all tables that Spring Cloud Task created
+select * from task_execution;
+```
+
+You should be able to see all program runs that you executed while the MariaDB instance is running.
 
 == Summary
-Congratulations! You have completed Spring Cloud Task's high-level overview, and you were able to build, test and launch
-a simple task and as well a batch-job.
+Congratulations! You have completed Spring Cloud Task's high-level overview, and you were able to build, test, and launch
+a Spring Cloud Task application.
