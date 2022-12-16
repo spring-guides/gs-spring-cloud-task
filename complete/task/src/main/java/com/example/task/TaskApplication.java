@@ -1,6 +1,7 @@
 package com.example.task;
 
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.task.configuration.EnableTask;
@@ -18,8 +19,8 @@ public class TaskApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner() {
-		return new HelloWorldCommandLineRunner();
+	public ApplicationRunner applicationRunner() {
+		return new HelloWorldApplicationRunner();
 	}
 
 	@BeforeTask
@@ -32,10 +33,10 @@ public class TaskApplication {
 		System.out.println("After task");
 	}
 
-	public static class HelloWorldCommandLineRunner implements CommandLineRunner {
+	public static class HelloWorldApplicationRunner implements ApplicationRunner {
 
 		@Override
-		public void run(String... args) throws Exception {
+		public void run(ApplicationArguments args) throws Exception {
 			System.out.println("Hello Spring Cloud Task!");
 		}
 	}
