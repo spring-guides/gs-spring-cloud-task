@@ -3,7 +3,7 @@ This guide walks you through an overview of Spring Cloud Task and the process of
 
 == Starting with Spring Initializr
 
-You can use this https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.0.0-RC2&packaging=jar&jvmVersion=17&groupId=com.example&artifactId=demo&name=demo&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.demo&dependencies=jdbc,cloud-task,mariadb,h2[pre-initialized project] and click *Generate* to download a ZIP file. This project is configured to fit the examples in this tutorial.
+You can use this https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.0.0&packaging=jar&jvmVersion=17&groupId=com.example&artifactId=demo&name=demo&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.demo&dependencies=jdbc,cloud-task,mariadb,h2[pre-initialized project] and click *Generate* to download a ZIP file. This project is configured to fit the examples in this tutorial.
 
 To manually initialize the project:
 
