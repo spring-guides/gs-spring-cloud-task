@@ -25,9 +25,9 @@ jobs:
           cache: maven
 
       - name: Build Initial with Maven
-        working-directory: ./task/initial
+        working-directory: ./initial/task
         run: ./mvnw --batch-mode clean package
 
       - name: Build Complete with Maven
-        working-directory: ./task/complete
+        working-directory: ./complete/task
         run: ./mvnw --batch-mode clean package
